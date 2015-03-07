@@ -10,8 +10,8 @@ public:
         cout << "Destruct Person" << endl;
     }
 public:
-    string name;//姓名
-    int sex;//1表示男0表示女
+    string name;// 姓名
+    int sex;// 1表示男0表示女
 };
 
 class Student : virtual public Person {

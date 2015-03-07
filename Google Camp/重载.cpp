@@ -3,20 +3,20 @@ using namespace std;
 
 #define StkType char
 
-struct StkNode{//栈节点
-	StkType data;//节点的数据，这里为data
-	StkNode *next;//节点的next节点
- 
-	//带参的构造函数
-	StkNode(StkType _data = '\0', StkNode *_next = NULL) {
-		data = _data;
-		next = _next;
-		cout << "StkNode() -> " << data << endl;
-	}
-	//析构
-	~StkNode() {
-	cout << "~StkNode() -> " << data << endl;
-	}
+struct StkNode { //栈节点
+    StkType data;//节点的数据，这里为data
+    StkNode *next;//节点的next节点
+
+    //带参的构造函数
+    StkNode(StkType _data = '\0', StkNode *_next = NULL) {
+        data = _data;
+        next = _next;
+        cout << "StkNode() -> " << data << endl;
+    }
+    //析构
+    ~StkNode() {
+        cout << "~StkNode() -> " << data << endl;
+    }
 };
 
 class Stack {
@@ -24,7 +24,6 @@ private:
     StkNode *top; // 栈顶指针，当栈为空时，指针为NULL
     int size;
     void copyOtherStk(const Stack &copyStk) {
-        this->clear();
         StkNode *tmp = copyStk.top;
         size = copyStk.size;
         if (tmp != NULL) {
@@ -59,16 +58,6 @@ public:
     void print() const;
 };
 
-int main() {
-    Stack s, t, d;
-    t.push('a');
-    s = t;
-    s.print();
-    t.print();
-    d.print();
-    return 0;
-}
-
 Stack::Stack() {
     top = NULL;
     size = 0;
@@ -78,6 +67,8 @@ Stack::Stack(const Stack &copyStk):top(NULL), size(copyStk.size) {
     StkNode *tmp = copyStk.top;
     if (tmp != NULL) {
         top = new StkNode(tmp->data, NULL);
+    } else {
+        return;
     }
     StkNode *current = top;
     while (tmp->next != NULL) {
@@ -95,6 +86,7 @@ Stack& Stack::operator= (const Stack &copyStk) {
         this->clear();
         return *this;
     }
+    this->clear();
     copyOtherStk(copyStk);
     return *this;
 }
